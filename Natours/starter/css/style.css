@@ -44,16 +44,18 @@ body {
 }
 
 .text-box {
-position: absolute;
-top: 40%;
-left:50%;
-/* below is needed to make sure that the text-box is in the middle */
-transform: translate(-50%, -50%);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  /* below is needed to make sure that the text-box is in the middle */
+  transform: translate(-50%, -50%);
 }
 
 .heading-primary {
   color: #fff;
   text-transform: uppercase;
+  /* below makes sure that the animation is not shaky */
+  backface-visibility: hidden;
 }
 
 .heading-primary-main {
@@ -61,6 +63,13 @@ transform: translate(-50%, -50%);
   font-size: 60px;
   font-weight: 400;
   letter-spacing: 35px;
+  /* below is needed to make the animation work */
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  /* below are other common settings */
+  /* animation-delay: 3s; */
+  /* animation-iteration-count: 3; */
 }
 
 .heading-primary-sub {
@@ -68,4 +77,40 @@ transform: translate(-50%, -50%);
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 17.4px;
+  /* below is a shorter way of writing  */
+  animation: moveInRight 1s ease-out;
 }
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    /* negative value means it moves to the left */
+    transform: translateX(-100px);
+  }
+
+  80% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    opacity: 1;
+    /* below makes it look like it does without animation */
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+  
+    80% {
+      transform: translateX(-10px);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
